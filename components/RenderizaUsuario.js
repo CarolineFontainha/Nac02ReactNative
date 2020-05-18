@@ -34,7 +34,8 @@ export default class RenderizaUsuario extends Component {
         foto : foto,
         id : id,
         primeiro_nome : primeiro_nome,
-        sobrenome : sobrenome,})
+        sobrenome : sobrenome,
+        email : email})
 
     })
     .catch(error=>console.log(error))
@@ -44,7 +45,11 @@ export default class RenderizaUsuario extends Component {
   render() {
     return(
       <View>
-      <Image source={{url:this.state.image}}> </Image>
+      <Image source={{uri:this.state.imagem}}
+               style={{width: '100%',
+                       height: 250,
+                       resizeMode:'contain',
+                       justifyContent:'center'}}/>
       <Text>{this.state.id}</Text>
       <Text>{this.state.primeiro_nome}</Text>
       <Text>{this.state.sobrenome}</Text>
