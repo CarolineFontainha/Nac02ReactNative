@@ -1,16 +1,13 @@
 import React, {Component} from 'react'
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, FlatList } from 'react-native'
 
-export default class RenderizaUsuario extends Component {
-   constructor(props) {
+export default class UsuarioListar extends Component {
+
+constructor(props) {
       super(props);
 
       this.state = {
-        foto : '',
-        id : 0,
-        primeiro_nome : '',
-        sobrenome : '',
-        email : ''
+        resposta : []
       };
   }
 
@@ -20,28 +17,22 @@ export default class RenderizaUsuario extends Component {
   }
 
   fetchJSON(){
-    fetch("https://reqres.in/api/users/4")
+    fetch("https://reqres.in/api/users?page=2")
     .then(item => item.json())
     .then((item)=> {
 
-      var foto = item['data']['avatar']
-      var id = item['data']['id'];
-      var primeiro_nome = item['data']['first_name']
-      var sobrenome = item['data']['last_name']
-      var email = item['data']['email']
+      
+      var resposta = item
 
       this.setState({
-        foto : foto,
-        id : id,
-        primeiro_nome : primeiro_nome,
-        sobrenome : sobrenome,
-        email : email})
+        resposta : item})
 
     })
     .catch(error=>console.log(error))
   }
-  
-  
+
+ 
+
   render() {
     return(
       <View>
@@ -50,11 +41,11 @@ export default class RenderizaUsuario extends Component {
                        height: 250,
                        resizeMode:'contain',
                        justifyContent:'center'}}/>
-      <Text>{this.state.id}</Text>
       <Text>{this.state.primeiro_nome}</Text>
       <Text>{this.state.sobrenome}</Text>
       <Text>{this.state.email}</Text>
       </View>
+      
     )
   }
 }
